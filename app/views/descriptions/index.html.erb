@@ -1,0 +1,36 @@
+<h1>List</h1>
+<p>
+	<%= link_to "New Description", new_description_path %>
+</p>
+<table >
+	<tr>
+		<th>
+			Title
+		</th>
+		<th>
+			Description
+		</th>
+	</tr>
+		<% @descriptions.each do |d| %>
+		<tr>
+			<td>
+				<%= d.title %>
+			</td>
+			<td>
+				<%= d.description %>
+			</td>
+			<td>
+				<%= time_ago_in_words(d.created_at) %> ago
+			</td>
+			<td>
+				<%= link_to 'Edit', edit_description_path(d) %>
+			</td>
+			<td>
+				<%= link_to 'Show', description_path(d) %>
+			</td>
+			<td>
+				<%= link_to 'Delete', description_path(d), method: :delete, data: {confirm: 'Are you sure?'} %>
+			</td>
+		</tr>
+		<% end %>
+</table>
