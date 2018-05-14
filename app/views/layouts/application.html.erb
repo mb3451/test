@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Myapp</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  </head>
+
+  <body>
+    <div class="row" style="background-color:#AFEEEE;">
+      <div class="container">
+        <div class="col-sm-12">
+          <div class="col-sm-4">
+            <%= link_to 'Projects', projects_path %>
+            <% if !user_signed_in? %>
+            <%= link_to 'Sign up', new_user_registration_path %>
+            <%= link_to 'Sign in', new_user_session_path %>
+            <% else %>
+            <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
+            <%= current_user.name %> 
+            <% end %>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+  	<%= render 'layouts/messages' %>
+    <%= yield %>
+  </body>
+</html>

@@ -1,0 +1,135 @@
+
+<% if @feature.errors.any? %>
+	<h2>Errors:</h2>
+	<ul>
+		<% @feature.errors.full_messages.each do |msg| %>
+			<li><%= msg %></li>
+		<% end %>
+	</ul>	
+<% end %>	
+
+<%= form_for([@feature.project, @feature]) do |f| %>
+<div class="row">
+<div class="col-sm-12">
+	<div class="col-sm-6">
+	
+		<%= f.label :title %>
+		<%= f.text_field :title, placeholder: "title", class: 'form-control' %>
+	
+</div>
+<div class="col-sm-6"><br>
+	
+		<%= f.label :description %>
+		<%= f.text_field :description, placeholder: "description", class: 'form-control' %>
+	
+</div>
+<div class="col-sm-6"><br>
+
+	
+		<%= f.label :type %>
+		<%= f.select :feature_type, ['feature','bug'] , {include_blank: true}, {class: "form-control"} %>
+
+	
+	</div>
+<div class="col-sm-6"><br>
+	
+		<%= f.label :status %>
+		<%= f.select :status, [] , {include_blank: true}, {class: "form-control"} %>
+	
+	</div>
+
+<div class="col-sm-6"><br>
+	
+		<%= f.label :developer %>
+		<%= f.collection_select :developer_id, 
+User.where("user_type = ?", "Developer"), :id, :name, {include_blank: true}, {class: "form-control"} %>
+		
+	
+	</div>
+	<div class="col-sm-6"><br>
+		<%= f.file_field :avatars %>
+		<% if @feature.avatars? %>
+			<%= image_tag @feature.avatars, width: 100 %>
+		<% end %>	
+		
+		
+
+	</div>
+<div class="col-sm-6"><br>
+	
+	
+		<%= f.submit class: "btn btn-success" %>
+	
+</div>
+</div>
+</div>
+<% end %>
+
+<script>
+
+
+$( document ).ready(function() {
+    if($('#feature_feature_type').val()== 'feature'){
+		var myOptions = {
+	    New : 'New',
+	    Started : 'Started',
+	    Completed : 'Completed'
+		};
+	}
+	else if ($('#feature_feature_type').val()== 'bug'){
+		var myOptions = {
+	    New : 'New',
+	    Started : 'Started',
+	    Resolved : 'Resolved'
+		};
+	}
+	else{
+		var myOptions = {
+		};
+
+	}
+	var mySelect = $('#feature_status');
+	$.each(myOptions, function(val, text) {
+	    mySelect.append(
+	        $('<option></option>').val(val).html(text)
+	    );
+	});
+	document.getElementById("feature_status").value = "<%= @feature.status %>";
+});
+
+
+
+$('#feature_feature_type').change(function() {
+	var dropdown=$('#feature_status');
+	dropdown.empty();
+
+
+
+
+	if($('#feature_feature_type').val()== 'feature'){
+		var myOptions = {
+	    New : 'New',
+	    Started : 'Started',
+	    Completed : 'Completed'
+		};
+	}
+	else if ($('#feature_feature_type').val()== 'bug'){
+		var myOptions = {
+	    New : 'New',
+	    Started : 'Started',
+	    Resolved : 'Resolved'
+		};
+	}
+	else{
+		var myOptions = {
+		};
+
+	}
+	var mySelect = $('#feature_status');
+	$.each(myOptions, function(val, text) {
+	    mySelect.append(
+	        $('<option></option>').val(val).html(text)
+	    );
+	});
+  });
+</script>
