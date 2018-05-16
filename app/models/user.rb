@@ -17,6 +17,9 @@ class User < ActiveRecord::Base
 	validates :name, presence: true
 	validates :user_type, presence: true
 	validates_inclusion_of :user_type, :in => ['Manager', 'QA', 'Developer']
+	# enum user_type: [ :active,z, :archived ]
+	# enum user_type: { active: 0, archived: 1 }
+
 end
 
 

@@ -15,7 +15,9 @@
 			<tr>
 				<td><%= @project.name %></td>
 				<td><%= link_to "Edit", edit_project_path(@project), class: "btn btn-warning" %></td>
-				<td><%= link_to "Show Features", project_features_path(@project), class: "btn btn-info" %></td>
+				<td><%= link_to "Show Features", project_features_path(@project), class: "btn btn-info", remote: true, id: "btn-show" %>
+					
+				</td>
 				<td>
 					<%= link_to 'Delete', project_path(@project), method: :delete, data: {confirm: 'Are you sure?'}, class: "btn btn-danger" %>
 				</td>
@@ -45,4 +47,11 @@
 			<% end %>
 		</table>
 	</div>
+</div>
+<div class="row">
+	<div class="col-sm-12">
+ 		<div id="features_div" >
+ 		</div>
+ 	</div>
+
 </div>

@@ -6,6 +6,14 @@ class FeaturesController < ApplicationController
 		
 		project = Project.find(params[:project_id])
     	@features = project.features
+    	# render json: {"features" => @features}
+    	respond_to do |format|
+		  format.js {render layout: false} # Add this line to you respond_to block
+		  format.html {} # Add this line to you respond_to block
+		end
+    
+    	
+    
    
 	end
 	

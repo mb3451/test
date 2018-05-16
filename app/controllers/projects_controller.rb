@@ -19,13 +19,15 @@ class ProjectsController < ApplicationController
 		@project.manager_id = current_user.id
 		if @project.save
 			flash[:notice] = "success"
-			redirect_to project_path(@project)
+			render json: {"id" => @project.id}
+			# redirect_to project_path(@project)
 		else
-			render 'new'
+			# render 'new'
 		end
 	end
 
 	def show
+		@features= []
 		
 	end
 
@@ -45,7 +47,8 @@ class ProjectsController < ApplicationController
 	def update
 		if @project.update(project_params)
 			flash[:notice] = "success"
-			redirect_to project_path(@project)
+			render json: {"id" => @project.id}
+			# redirect_to project_path(@project)
 		else
 			render 'edit'
 		end

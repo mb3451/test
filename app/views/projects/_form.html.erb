@@ -9,7 +9,7 @@
 <% end %>	
 
 
-<%= form_for @project do |f| %>
+<%= form_for @project , :html => { :id => "project" } do |f|  %>
 <div class="row">
 	<div class="col-sm-12">
 		<div class="col-sm-6">
@@ -23,8 +23,9 @@
 		<%= f.collection_select :user_ids, User.all, :id, :name, {}, {class: "form-control chzn_select medium", multiple: true} %>
 	</div>
 	<div class="col-sm-6"><br>
-		<%= f.submit class: "btn btn-success" %>
+		<%= f.submit class: "btn btn-success" , id: "btn-success"  %>
 	</div>
 <% end %>	
 </div>
 </div>
+
