@@ -17,7 +17,7 @@ $(function(){
       url: this.action,
       data: $(this).serialize(),
       success: function(response) {
-        $("#msg").append("Project with id "+response.id+" is updated");
+        $("#msg").html("Project with id "+response.id+" is updated");
         $("#msg").show();
                setTimeout(function() { $("#msg").hide(); }, 3000);
                 document.getElementById('btn-success').disabled = false;
